@@ -1,0 +1,30 @@
+body {
+    background-color: #d3d3d3;
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+}
+
+body h1 {
+    text-align: center;
+    font-size: 90px;
+}
+#digital_clock  {
+  font-family: 'Anton', sans-serif;;
+  color: #000;
+  font-size: 90px;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+
+
+#digital_date  {
+  font-family:  'Anton', sans-serif;;
+  color: #000;
+  font-size: 90px;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
