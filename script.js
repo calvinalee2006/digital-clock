@@ -30,12 +30,12 @@ currentTime();
 function currentDate() {
     var date = new Date();
 
-    var day = days.date.getDay();
-    var month = months.date.getMonth()
+    var day = days[date.getDay()];
+    var month = months[date.getMonth()];
     var dateOfMonth = date.getDate();
     var year = date.getFullYear()
 
-    document.getElementById('digital_date').innerHTML = `${day}, ${month}, ${dateOfMonth + nth(date)}, ${year}`;
+    document.getElementById('digital_date').innerHTML = `${day}, ${month} ${dateOfMonth + nth(date)} ${year}`;
 }
 
 const nth = function (d) {
