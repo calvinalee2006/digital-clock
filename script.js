@@ -1,55 +1,72 @@
+//need to add verbal explanation
+const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+];
+
+
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+
 function currentTime() {
-    var date = new Date();
+    const date = new Date();
 
-    var hour = date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-    var midday = "AM";
-    midday = (hour >= 12) ? "PM" : "AM";
-    hour = (hour == 0) ? 12 : ((hour > 12) ? (hour - 12) : hour);
+    let hour = date.getHours(); // Have descriptive variables
+    const minute = date.getMinutes().toString().padStart(2, 0);
+    const second = date.getSeconds().toString().padStart(2, 0);// look up padStart 
 
-    hour = updateTime(hour);
-    min = updateTime(min);
-    sec = updateTime(sec);
-    document.getElementById("digital_clock").innerText = `${hour} : ${min} : ${sec} ${midday}`
-    var t = setTimeout(function () { currentTime() }, 1000)
+    const midday = hour > 12 ? "PM" : "AM";
+    hour = (hour > 12 ? hour - 12 : hour).toString().padStart(2, 0); // shorter and easier to read
+
+    const time = document.getElementById("digital-clock");
+    time.textContent = `${hour} : ${minute} : ${second} ${midday}`
 }
 
-function updateTime(k) {
-    if (k < 10) {
-        return "0" + k;
-    }
-    else {
-        return k
-    }
+function currentDate() {
+    const date = new Date();
+
+    const day = days[date.getDay()];
+    const month = months[date.getMonth()];
+    const dateOfMonth = dateSuffix(date.getDate());
+    const year = date.getFullYear()
+
+    const today = document.getElementById('digital-date');
+    today.textContent = `${day}, ${month} ${dateOfMonth} ${year}`;
 }
+
+const dateSuffix = (date) => {
+    if (date > 3 && date < 21) return 'th';
+
+    switch (date % 10) {
+        case 1:
+            return `${date}st`;
+        case 2:
+            return `${date}nd`;
+        case 3:
+            return `${date}rd`;
+        default:
+            return `${date}th`;
+    }
+};
 
 
 currentTime();
-
-function currentDate() {
-    var date = new Date();
-
-    var day = days[date.getDay()];
-    var month = months[date.getMonth()];
-    var dateOfMonth = date.getDate();
-    var year = date.getFullYear()
-
-    document.getElementById('digital_date').innerHTML = `${day}, ${month} ${dateOfMonth + nth(date)} ${year}`;
-}
-
-const nth = function (d) {
-    if (d > 3 && d < 21) return 'th';
-    switch (d % 10) {
-        case 1: return "st";
-        case 2: return "nd";
-        case 3: return "rd";
-        default: return "th";
-    }
-}
-
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
 currentDate();
+setInterval(currentTime, 1000)
